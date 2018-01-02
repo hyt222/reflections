@@ -1,0 +1,81 @@
+What happens when you initialize a repository? Why do you need to do it?
+初始化版本库时会发生什么情况？为什么你需要这样做？
+
+	初始化版本库会创建一个 .git 的隐形目录
+	里面可以存放我们即将要 commit 的元数据，方便之后对代码进行增删等修改
+	还可以拥有恢复之前提交的代码的功能
+
+	为了以后的方便，必须使用！！！
+
+How is the staging area different from the working directory and the repository?
+What value do you think it offers?
+暂存区与工作目录和版本库有何不同？你认为它具有什么价值？
+
+	暂存区是暂存需要提交的文件修改的地方，并不是所有文件都在暂存区
+	工作目录是我们做修改的地方，当前写代码的地方，保存所有文件的地方
+	版本库是已经提交的修改代码的版本，若提交，提交的是暂存区的文件到版本库
+
+How can you use the staging area to make sure you have one commit per logical
+change?
+如何使用暂存区确保为每项逻辑更改进行一次提交？
+
+	在对逻辑更改进行提交之前，可以先把更改的文件添加入暂存区
+	然后再对暂存区文件进行提交
+	可以先使用 git diff 查看自己在工作目录进行了哪些修改
+	确认之后将文件添加到暂存区
+	再使用 git diff --staged 查看暂存区与上一次提交间的区别
+	最后确认修改，提交暂存区的文件
+
+	若需要取消工作目录与暂存区的所有修改，使用 git reset --hard
+
+What are some situations when branches would be helpful in keeping your history
+organized? How would branches help?
+在哪些情况下，分支可以帮助你有序地组织历史记录？分支将如何提供帮助？
+
+	在想要对当前项目做一些实验性的修改的情况下
+	可以在不改变原来进行的工作前提下，修改现有代码达到目的
+	达到后合并分支可以实现新功能
+
+	一个小的逻辑修改也需要创建分支
+
+	分支可以使当前修改独立于主分支，即使出现错误也不会影响主分支
+
+	纠正 bug , 制作不同内容创建新分支。
+	分支使你能使项目保持条理性，尤其当你公开分享项目。
+	master 是产品质量分支，绝对不崩溃，始终能运转
+	会有一个开发分支，包含正在进行的项目内容
+
+	很多情况下还有实验性分支，或者独特功能分支
+	借助分支切换工作内容，分隔出这部分工作
+
+
+How do the diagrams help you visualize the branch structure?
+图表如何帮助你直观显示分支结构？
+
+	图表很清晰看到分支之间互不影响，相互独立
+	对于 commit 的父元素以及 log 可以显示的可到达的 commit 更好理解
+	也很明白，哪一个分支无法到达
+
+
+
+What is the result of merging two branches together? Why do we represent it in
+the diagram the way we do?
+将两个分支合并到一起有何结果？为什么我们在图表中表示它的方式是那样的？
+
+	存储为两个分支最新提交的合并
+	合并的最新提交的父提交有两个，即合并前两个分支的最新提交
+	master 分支与其他合并为 master
+
+	合并之后提交按时间排序
+	图表可以显示我们合并的提交
+
+
+
+What are the pros and cons of Git's automatic merging vs. always doing merges
+manually?
+Git 的自动合并与始终手动进行合并各有何优缺点？
+
+	git 自动合并快捷方便，对于增加和删除很敏感，不需要确认
+	但是会出现合并冲突，但是 git 标记出冲突位置让我们方便修改
+
+	手动合并比较麻烦，但是对代码可以有很好的了解，从整体把我如何合并
